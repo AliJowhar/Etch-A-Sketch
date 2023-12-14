@@ -1,6 +1,8 @@
 "use strict";
 const board = document.querySelector(".board");
 const blackBtn = document.querySelector(".black");
+const rainbowBtn = document.querySelector(".rainbow");
+const eraserBtn = document.querySelector(".erase");
 
 //generate board
 function makeRows(rows, cols) {
@@ -15,9 +17,30 @@ function makeRows(rows, cols) {
         cell.style.backgroundColor = "black";
       });
     });
+
+    rainbowBtn.addEventListener("click", () => {
+      cell.addEventListener("mouseover", () => {
+        cell.style.backgroundColor = randomColor();
+      });
+    });
+    eraserBtn.addEventListener("click", () => {
+      cell.addEventListener("mouseover", () => {
+        cell.style.backgroundColor = "white";
+      });
+    });
   }
 }
 
-makeRows(8, 8);
+// makeRows(8, 8);
+makeRows(16, 16);
 
-//black hover effect
+// Random color generator
+
+//The randomInt() function generates a random number between the range of 0 and 255,
+function randomInt(min = 0, max = 255) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function randomColor() {
+  return `rgb(${randomInt()}, ${randomInt()}, ${randomInt()})`;
+}
